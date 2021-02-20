@@ -180,4 +180,23 @@ class ClsUserModel{
             throw $Error;
         }
     }
+    //-----------------
+    // ELIMINAR USUARIO
+    //-----------------
+    public function DeleteUser(){
+        try{
+            $ClsMongoDB = new ClsMongoDB();
+            $ConnectionMongo=$ClsMongoDB->getConnectionDB();
+            
+            $ConnectionMongo->Users->findOneAndDelete([
+                '_id' =>new MongoDB\BSON\ObjectID($this->strId)
+            ]);
+            
+           
+            $ClsMongoDB=null;
+            $ConnectionMongo=null;
+        }catch(Exeption $Error){
+            throw $Error;
+        }
+    }
 }

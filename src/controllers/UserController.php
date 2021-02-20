@@ -116,7 +116,7 @@ class ClsControllerUser{
         }
     }
     //----------------
-    // VALIDATE EMAIL
+    // USERS
     //----------------
     public function GetUsers(){
         try{
@@ -198,6 +198,22 @@ class ClsControllerUser{
  
             //Creación usuario
             $ModelUser->UpdateUser();
+ 
+            $ModelUser=null;
+ 
+        }catch(Exeption $Error){
+            throw $Error;
+        }
+     }
+    //------------------
+    // ELIMINAR USUARIO
+    //------------------
+    public function DeleteUser($Data){
+        try{
+            $ModelUser= new ClsUserModel();
+
+            $ModelUser->setStrIdUser($Data['_id']);
+            $ModelUser->DeleteUser();
  
             $ModelUser=null;
  

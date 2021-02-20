@@ -103,3 +103,19 @@ $app->post('/api/user/updateuser', function (Request $request, Response $respons
         return $response->withStatus(500);
     }
 });
+//DELETE USUARIO
+$app->delete('/api/user/deleteuser', function (Request $request, Response $response, $args) {
+    try{
+        $Data=$request->getParsedBody();
+        //CLASE USERCONTROLLER
+        $User= new ClsControllerUser();
+        $User->DeleteUser($Data);
+        $User=null;
+
+        $response->getBody()->write(json_encode(array("Success"=>true)));
+        return $response->withStatus(201);
+    }catch(Exception $Error){
+        $response->getBody()->write(json_encode(array("Success"=>false)));
+        return $response->withStatus(500);
+    }
+});
