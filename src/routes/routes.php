@@ -1,3 +1,3 @@
 <?php
 
-require_once "../src/controllers/prueba.php";
+require_once "../src/api/ApiUser.php";
