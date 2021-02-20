@@ -117,3 +117,21 @@ $app->post('/api/blogpost/addcomment', function (Request $request, Response $res
         return $response->withStatus(500);
     }
 });
+
+
+//ADD LIKE BLOG POST
+$app->put('/api/blogpost/addlike', function (Request $request, Response $response, $args) {
+    try{
+        $Data=$request->getParsedBody();
+        //CLASE USERCONTROLLER
+        $BlogPost= new ClsControllerBlogPost();
+        $BlogPost->AddCountLikes($Data);
+        $BlogPost=null;
+
+        $response->getBody()->write(json_encode(array("Success"=>true)));
+        return $response->withStatus(201);
+    }catch(Exception $Error){
+        $response->getBody()->write(json_encode(array("Success"=>false)));
+        return $response->withStatus(500);
+    }
+});

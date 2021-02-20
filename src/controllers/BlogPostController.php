@@ -66,7 +66,8 @@ class ClsControllerBlogPost{
                     "blobImg"=>$BlogPost->blobImg,
                     "dtDateCreate"=>$BlogPost->dtDateCreation,
                     "dtDateUpdate"=>$BlogPost->dtDateUpdate,
-                    "ArrayComments"=>$BlogPost->ArrayComments
+                    "ArrayComments"=>$BlogPost->ArrayComments,
+                    "intContadorLikes"=>$BlogPost->intContadorLikes
                     )
                 );
             }
@@ -98,7 +99,8 @@ class ClsControllerBlogPost{
                             "blobImg"=>$BlogPost->blobImg,
                             "dtDateCreation"=>$BlogPost->dtDateCreation,
                             "dtDateUpdate"=>$BlogPost->dtDateUpdate,
-                            "ArrayComments"=>$BlogPost->ArrayComments
+                            "ArrayComments"=>$BlogPost->ArrayComments,
+                            "intContadorLikes"=>$BlogPost->intContadorLikes
                 );
            }
            $this->setResponseDataApi($ArrayUser);
@@ -170,7 +172,8 @@ class ClsControllerBlogPost{
                     "blobImg"=>$BlogPost->blobImg,
                     "dtDateCreate"=>$BlogPost->dtDateCreation,
                     "dtDateUpdate"=>$BlogPost->dtDateUpdate,
-                    "ArrayComments"=>$BlogPost->ArrayComments
+                    "ArrayComments"=>$BlogPost->ArrayComments,
+                    "intContadorLikes"=>$BlogPost->intContadorLikes
                     )
                 );
             }
@@ -204,6 +207,25 @@ class ClsControllerBlogPost{
             throw $Error;
         }
      }
-     
+     //------------------
+     //CONTADOR DE LIKES
+     //------------------
+     public function AddCountLikes($Data){
+        try{
+            $ModelBlogPost= new ClsBlogPostModel();
+
+            $ModelBlogPost->setStrIdBlogPost($Data['_id']);
+            $ModelBlogPost->setIntCountLikes($Data['intLike']);
+ 
+ 
+            //Actualizar blog post
+            $ModelBlogPost->AddCountLikes();
+ 
+            $ModelBlogPost=null;
+ 
+        }catch(Exeption $Error){
+            throw $Error;
+        }
+     }
 
 }

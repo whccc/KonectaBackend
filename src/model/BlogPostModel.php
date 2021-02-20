@@ -13,6 +13,7 @@ class ClsBlogPostModel{
     private $dtCreateBlogPost;
     private $dtUpdateBlogPost;
     private $strNameUserComment;
+    private $intCountLikes;
 
     private $ResponseData;
 
@@ -53,6 +54,9 @@ class ClsBlogPostModel{
     public function setStrNameUserComment($strNameUserComment){
         $this->strNameUserComment=$strNameUserComment;
     }
+    public function setIntCountLikes($intCountLikes){
+        $this->intCountLikes=$intCountLikes;
+    }
     public function getResponseData(){
         return $this->ResponseData;
     }
@@ -76,7 +80,8 @@ class ClsBlogPostModel{
                 'blobImg'=> $this->blobImg,
                 'dtDateCreation'=>$this->dtCreateBlogPost,
                 'dtDateUpdate'=> $this->dtUpdateBlogPost,
-                "ArrayComments"=>[]
+                "ArrayComments"=>[],
+                "intContadorLikes"=> "0"
             ]);
 
             $ClsMongoDB=null;
@@ -204,6 +209,31 @@ class ClsBlogPostModel{
                 "dtDateCreation"=>$this->dtCreateBlogPost
                 ]  
             ]]);
+            
+           
+            $ClsMongoDB=null;
+            $ConnectionMongo=null;
+        }catch(Exeption $Error){
+            throw $Error;
+        }
+    }
+     //----------------------
+    // ADD LIKES BLOG POST
+    //----------------------
+    public function AddCountLikes(){
+        try{
+            $ClsMongoDB = new ClsMongoDB();
+            $ConnectionMongo=$ClsMongoDB->getConnectionDB();
+            
+            $DataResult=$ConnectionMongo->BlogPost->findOne([
+                '_id' =>new MongoDB\BSON\ObjectID($this->strId)
+            ]);;
+
+            $ConnectionMongo->BlogPost->findOneAndUpdate([
+                '_id' =>new MongoDB\BSON\ObjectID($this->strId)
+            ],
+            [ '$set' => [ 'intContadorLikes' =>$DataResult->intContadorLikes + 1]
+            ]);
             
            
             $ClsMongoDB=null;
