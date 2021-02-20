@@ -19,7 +19,7 @@ class ClsMongoDB{
             // conectarse
             $mongo = new MongoDB\Client('mongodb+srv://admin:123456admin@chatwhc.5tnho.mongodb.net/BlogKonecta?retryWrites=true&w=majority');
             //seleccionar
-            $db = $mongo->BlogKonectas; 
+            $db = $mongo->BlogKonecta; 
             
             $Encrypt= new ClsEncrypt();
             $DataResult=$db->Users->findOne([
@@ -34,6 +34,24 @@ class ClsMongoDB{
                     'strTypeUser'=> 'admin',
                     "dtDateCreation"=>date("d/m/y T H:i:s"),
                     "dtDateUpdate"=>date("d/m/y T H:i:s")
+                ]);
+            }
+            //Categories
+            $DataResult=$db->Categories->findOne([
+                'strName' =>'Deporte',
+            ]);
+            if($DataResult==null){
+                $db->Categories->insertOne([
+                    'strName' => 'Deporte',
+                ]);
+                $db->Categories->insertOne([
+                    'strName' => 'Cultura',
+                ]);
+                $db->Categories->insertOne([
+                    'strName' => 'Ciencia',
+                ]);
+                $db->Categories->insertOne([
+                    'strName' => 'Gastronomía',
                 ]);
             }
             //$coleccion = $db->createCollection("Users");
