@@ -181,7 +181,7 @@ class ClsControllerUser{
             throw $Error;
         }
     }
-     //------------------
+    //------------------
     // ACTUALIZAR USUARIO
     //------------------
     public function UpdateUser($Data){
