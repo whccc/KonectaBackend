@@ -17,7 +17,7 @@ class ClsMongoDB{
     private function ConnectionDB(){
         try{
             // conectarse
-            $mongo = new MongoDB\Client('mongodb+srv://admin:123456admin@chatwhc.5tnho.mongodb.net/BlogKonecta?retryWrites=true&w=majority');
+            $mongo = new MongoDB\Client('mongodb://localhost/BlogKonecta');
             //seleccionar
             $db = $mongo->BlogKonecta; 
             
